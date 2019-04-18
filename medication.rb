@@ -25,7 +25,7 @@ end
 
 class Cough_Syrup < Medication
     def initialize
-        super("Cough Syrip", ["ml", 30], "once daily")
+        super("Cough Syrup", ["ml", 30], "once daily")
     end
 end
 

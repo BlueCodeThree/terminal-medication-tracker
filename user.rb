@@ -33,8 +33,8 @@ class User
     def print_schedule
         clear
         puts "-- MEDICATION SCHEDULE --".center(30)
-        @medication.each do |name, details| 
-            puts "#{name}: #{details.dose[1]} #{details.dose[0]} #{details.frequency}"
+        @medication.each do |name, medication| 
+            puts "#{name}: #{medication.dose[1]} #{medication.dose[0]} #{medication.frequency}"
         end
         puts
     end
@@ -51,18 +51,19 @@ class User
         end
         
         # This grab that array and shows the user a multiple choice of the medication
-        take_medication = prompt.multi_select("Please select what you have taken today", choices)
-
-        # Adds the medication that has been selected to the history
-        take_medication.each do |medication|
+        prompt.multi_select("Please select what you have taken today", choices, cycle: true, marker: '>', echo: false).each do |medication|
             add_history(@medication[medication])
-            puts "You took #{medication}"
         end
         puts
     end
 
     def add_history(medication)
         @history.push({time: Time.now, medication: medication.name, dose: medication.dose})
+        puts "You took #{medication.name}"
+    end
+
+    def save_history
+
     end
 
     # this will print out the history of what they took for the user
