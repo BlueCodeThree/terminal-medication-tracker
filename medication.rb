@@ -23,7 +23,7 @@ class Asprin < Medication
     end
 end
 
-class Cough_Syrip < Medication
+class Cough_Syrup < Medication
     def initialize
         super("Cough Syrip", ["ml", 30], "once daily")
     end

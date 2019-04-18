@@ -1,5 +1,6 @@
 require_relative 'medication'
 require 'io/console'
+require 'tty-prompt'
 
 class User
     attr_reader :name
@@ -41,26 +42,23 @@ class User
     # user adding in the medication they have taken to the app
     def take_medication
         clear
+        choices = {}
+        prompt = TTY::Prompt.new
+
+        # Goes through all the medicine for the user, and adds the details of each to a hash that will be used to ask the user if they have taken them today. 
         @medication.each do |name, medication|
-            check_medication_input(name, medication)
+            choices["#{medication.dose[1]} #{medication.dose[0]} of #{name}"] = name
         end
-    end
+        
+        # This grab that array and shows the user a multiple choice of the medication
+        take_medication = prompt.multi_select("Please select what you have taken today", choices)
 
-    def check_medication_input(name, medication)
-        puts "#{@name}, did you take #{medication.dose[1]} #{medication.dose[0]} of #{name}? (Y / N)"
-        case $stdin.getch.downcase
-        when "y"
-            #add it to the history array
-            add_history(@medication[name])
-            puts "You took #{name}!\n\n"
-
-        when "n"
-            puts "You didn't take #{name}\n\n"
-
-        else
-            puts "Oops, something went wrong\n\n"
-            check_medication_input(name, medication)
+        # Adds the medication that has been selected to the history
+        take_medication.each do |medication|
+            add_history(@medication[medication])
+            puts "You took #{medication}"
         end
+        puts
     end
 
     def add_history(medication)

@@ -5,7 +5,7 @@ require_relative 'medication.rb'
 
 #Initialize the user and the medicine
 marge = User.new("Marge")
-marge.add_medication(Panadol.new).add_medication(Asprin.new).add_medication(Cough_Syrip.new)
+marge.add_medication(Panadol.new).add_medication(Asprin.new).add_medication(Cough_Syrup.new)
 
 # Initializing the menu
 menu = TTY::Prompt.new
@@ -14,15 +14,10 @@ clear
 puts "Hello #{marge.name}"
 marge.enter_pin
 
-loop do
-    selection = menu.select("Please select from the following", ["Take Medication", "Schedule",  "History", "Exit"], cycle: true, marker: '>')
+currently_using = true
 
-    # puts "Please select the menu number from the following:"
-    # puts "1. History"
-    # puts "2. Schedule"
-    # puts "3. Record Your Medication That You've Taken" # make this sound nicer and put it first. 
-    # puts "4. Exit the program"
-    # puts
+while currently_using
+    selection = menu.select("Please select from the following", ["Take Medication", "Schedule",  "History", "Exit"], cycle: true, marker: '>')
 
     case selection
     when 'History'
@@ -33,7 +28,8 @@ loop do
         marge.take_medication
     when "Exit"
         clear
-        abort("Have a lovely day, #{marge.name}")
+        puts "Have a lovely day, #{marge.name}"
+        currently_using = false
     else
         puts "Ooops, something went wrong"
     end
