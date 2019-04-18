@@ -4,8 +4,7 @@ require_relative 'user.rb'
 require_relative 'medication.rb'
 
 #Initialize the user and the medicine
-marge = User.new("Marge")
-marge.add_medication(Panadol.new).add_medication(Asprin.new).add_medication(Cough_Syrip.new)
+marge = User.new("Marge").add_medication(Panadol.new).add_medication(Asprin.new).add_medication(Cough_Syrip.new)
 
 # Initializing the menu
 menu = TTY::Prompt.new
