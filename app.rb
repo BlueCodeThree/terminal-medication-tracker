@@ -1,7 +1,7 @@
 # require 'io/console'
 require 'tty-prompt'
-require_relative 'user'
-require_relative 'medication'
+require_relative 'classes/user'
+require_relative 'classes/medication'
 
 #Initialize the user and their medicine
 marge = User.new("Marge")
