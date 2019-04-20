@@ -30,9 +30,9 @@ class User
     end
 
     # this will loop through the medication and provide a schedule for the user
-    def print_schedule
+    def print_medication
         clear
-        puts "-- MEDICATION SCHEDULE --".center(30)
+        puts "-- YOUR MEDICATION --".center(30)
         @medication.each do |name, medication| 
             puts "#{name}: #{medication.dose[1]} #{medication.dose[0]} #{medication.frequency}"
         end
@@ -41,6 +41,15 @@ class User
 
     # user adding in the medication they have taken to the app
     def take_medication
+        if @history.length >= @medication.length
+            clear
+            puts "You have already taken your medication today!\n\n"
+        else
+            select_medication
+        end
+    end
+
+    def select_medication
         clear
         choices = {}
         prompt = TTY::Prompt.new
@@ -51,7 +60,7 @@ class User
         end
         
         # This grab that array and shows the user a multiple choice of the medication
-        prompt.multi_select("Please select what you have taken today", choices, cycle: true, marker: '>', echo: false).each do |medication|
+        prompt.multi_select("Please select what you have taken today:", choices, cycle: true, marker: '>', echo: false).each do |medication|
             add_history(@medication[medication])
         end
         puts
@@ -72,13 +81,14 @@ class User
         if @history.length == 0
             puts "You haven't taken any medicine yet"
         else
-            puts " -- YOUR MEDICATION HISTORY --"
+            puts " --   YOUR MEDICATION HISTORY   --"
             @history.each do |record|
                 puts "#{record[:time]}: #{record[:dose][1]} #{record[:dose][0]} of #{record[:medication]}"
             end
         end
         puts
     end
+    
 end
 
 # handy clear function
