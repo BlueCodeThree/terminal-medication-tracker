@@ -2,6 +2,8 @@
 
 A simple medication tracker, created with ruby, used in the terminal. The purpose of this app was for me to practice OOP.
 
+![medication tracker](docs/2019-04-medication.gif "Medication Tracker")
+
 ## Description of the ​app
 
 ### Purpose
@@ -42,7 +44,11 @@ To run the app, in terminal type: `ruby app.rb`
 
 It was my intention to have this app be very accessible, as the target audience may have various disabilities. The app was designed to be easy to navigate.
 
-One concern is the tty-prompt gem - the characters that it uses might not work in all terminals. In some terminals it only displays a box with a question mark. However, even with the incorrect character showing, the program is still fully functional. 
+One concern is the tty-prompt gem - the characters that it uses might not work in all terminals. In some terminals it only displays a box with a question mark. However, even with the incorrect character showing, the program is still fully functional.
+
+![example of different output](docs/different-output-terminal.jpg "Example of different output")
+
+Above is an example, with the image to the left showing a symbol with a `?` inside - however the character still turns green when selected, so it is usable. The image to the right shows the symbols displaying correctly.
 
 ### Potential legal, moral, ethical, cultural and safety issue
 
